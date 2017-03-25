@@ -1,0 +1,69 @@
+{
+    "description": "xcodebuild-tools configuration",
+
+    "definitions": {
+        "task": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "program": {
+                    "type": "string"
+                },
+                "args": {
+                    "type": "array",
+                    "items": {
+                        "type":"string"
+                    }
+                },
+                "cwd": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "program",
+                "args",
+                "cwd"
+            ]
+        },
+        "tasks": {
+            "type": "array",
+            "items": { 
+                "$ref": "#/definitions/task" 
+            }
+        }
+    },
+
+    "type": "object",
+    "properties": {
+        "workspace": {
+            "type": "string",
+            "description": "path to Xcode workspace"
+        },
+        "scheme": {
+            "type": "string",
+            "description": "name of Xcode scheme"
+        },
+        "postBuildTasks": { 
+            "$ref": "#/definitions/tasks" 
+        },
+        "debugConfigurations": { 
+            "$ref": "#/definitions/tasks" 
+        },
+        "variables": {
+            "type": "object",
+            "patternProperties": {
+                "^[A-Za-z_]+$" : {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "workspace",
+        "scheme"
+    ]
+}
