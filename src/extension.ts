@@ -7,7 +7,7 @@ import * as ajv from 'ajv';
 import * as vscode from 'vscode';
 
 import * as util from './util';
-import * as expand from './expand';
+import * as expander from './expand';
 import * as diagnostics from './diagnostics';
 import * as status from './status';
 
@@ -61,6 +61,21 @@ interface SpawnOptions
     
     message?: string;
     parseOutput?: boolean;
+}
+
+function expand(e:expander.Expander, opts: SpawnOptions) : SpawnOptions
+{
+    return {
+        program: e.expand(opts.program),
+        args: e.expand(opts.args),
+        cwd: e.expand(opts.cwd),
+
+        channel: opts.channel,
+        initChannel: opts.initChannel,
+        
+        message: e.expand(opts.message),
+        parseOutput: opts.parseOutput
+    };
 }
 
 class Extension
@@ -215,7 +230,7 @@ class Extension
         }        
     }
 
-    private expander() : expand.Expander
+    private expander() : expander.Expander
     {
         const M = new Map<string, string>();
 
@@ -229,7 +244,7 @@ class Extension
             M.set(v, val);
         }
 
-        return new expand.Expander(M);
+        return new expander.Expander(M);
     }
 
     private buildState : BuildState = BuildState.IDLE;
@@ -293,37 +308,37 @@ class Extension
         });
     }
 
-    private async asyncSpawnXcodebuild(e:expand.Expander, extraArgs:string[]) : Promise<child_process.ChildProcess>
+    private async asyncSpawnXcodebuild(e:expander.Expander, extraArgs:string[]) : Promise<child_process.ChildProcess>
     {
         let args: SpawnOptions= {
             program: "xcodebuild",
             args: [
-                "-workspace", e.expand(this.config.workspace), 
-                "-scheme", e.expand(this.config.scheme), 
+                "-workspace", this.config.workspace, 
+                "-scheme", this.config.scheme, 
                 "-configuration", this.buildConfig,
-                e.expand("CONFIGURATION_BUILD_DIR=${buildPath}")
-            ].concat(e.expand(extraArgs)),
+                "CONFIGURATION_BUILD_DIR=${buildPath}"
+            ].concat(extraArgs),
             channel: this.buildOutputChannel,
             initChannel: true,
             parseOutput: true
         };
 
-        return await this.asyncSpawn(args);
+        return await this.asyncSpawn(expand(e, args));
     }
 
-    private async asyncSpawnTask(e:expand.Expander, task: TaskConfiguration) : Promise<child_process.ChildProcess>
+    private async asyncSpawnTask(e:expander.Expander, task: TaskConfiguration) : Promise<child_process.ChildProcess>
     {
         let args: SpawnOptions =
         {
-            program: e.expand(task.program),
-            args: e.expand(task.args),
-            cwd: e.expand(task.cwd),
+            program: task.program,
+            args: task.args,
+            cwd: task.cwd,
             channel: this.buildOutputChannel,
             initChannel: false,
-            message: `Runnning Task: ${e.expand(task.name)}`
+            message: `Runnning Task: ${task.name}`
         };
 
-        return await this.asyncSpawn(args);
+        return await this.asyncSpawn(expand(e, args));
     }
 
     private async wrapBuild<T>( f: () => T ) : Promise<T|null>
@@ -348,7 +363,7 @@ class Extension
         }
     }
 
-    private async asyncBuild(e:expand.Expander)
+    private async asyncBuild(e:expander.Expander)
     {
         await this.asyncSpawnXcodebuild(e, []);
 

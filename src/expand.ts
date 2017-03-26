@@ -86,11 +86,16 @@ export class Expander
     public expand(s: string) : string;
     public expand(a: string[]) : string[];
     public expand(n: null) : null;
+    public expand(u: undefined) : undefined;
     public expand(x: any)
     {
         if( x === null )
         {
             return null;
+        }
+        else if ( x === undefined )
+        {
+            return undefined;
         }
         else if( typeof x === 'string' )
         {
