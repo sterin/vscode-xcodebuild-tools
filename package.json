@@ -29,6 +29,7 @@
     "onCommand:xcodebuild-tools.build",
     "onCommand:xcodebuild-tools.clean",
     "onCommand:xcodebuild-tools.debug",
+    "onCommand:xcodebuild-tools.profile",
     "onCommand:xcodebuild-tools.run",
     "onCommand:xcodebuild-tools.kill",
     "onCommand:xcodebuild-tools.selectBuildConfiguration",
@@ -52,6 +53,11 @@
       {
         "command": "xcodebuild-tools.debug",
         "title": "Launch Debug Session",
+        "category": "Xcodebuild-tools"
+      },
+      {
+        "command": "xcodebuild-tools.profile",
+        "title": "Profile Program",
         "category": "Xcodebuild-tools"
       },
       {

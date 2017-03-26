@@ -105,7 +105,8 @@ class Extension
         const commandNames = [
             'build', 
             'clean', 
-            'debug', 
+            'debug',
+            'profile',
             'run', 
             'kill', 
             'selectBuildConfiguration', 
@@ -419,6 +420,38 @@ class Extension
             };
 
             await vscode.commands.executeCommand("vscode.startDebug", config);
+        });
+    }
+
+    public async profile()
+    {
+        await this.wrapBuild( async () => 
+        {
+            const e = this.expander();
+
+            await this.asyncBuild(e);
+        
+            const dc = this.debugConfig;
+            
+            let proc = util.spawn(
+                "instruments",
+                [
+                    "-t", "Time Profiler",
+                    e.expand(dc.program)
+                ].concat(e.expand(dc.args)), 
+                e.expand(dc.cwd)
+            );
+
+            util.redirectToChannel(proc, this.runOutputChannel, true);
+
+            this.runOutputChannel.appendLine(
+                `[xcodebuild-tools] Running: instruments -t "Time Profiler" ${e.expand(dc.program)} ${e.expand(dc.args)}`
+            );
+
+            proc.on('terminated', (message:string) => 
+            {
+                this.runOutputChannel.append(`[xcodebuild-tools] ${message}`);
+            });
         });
     }
 
