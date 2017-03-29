@@ -100,6 +100,11 @@ class Extension
 
     private config : Configuration = null;
 
+    private addDisposable(d: vscode.Disposable) : void
+    {
+        this.context.subscriptions.push(d);
+    }
+
     public constructor(private context: vscode.ExtensionContext)
     {
         const commandNames = [
@@ -136,10 +141,16 @@ class Extension
         }
 
         const configWatcher = vscode.workspace.createFileSystemWatcher(this.configFilePath);
+        this.addDisposable( configWatcher );
 
-        configWatcher.onDidCreate((uri : vscode.Uri) => this.reloadConfig(uri.fsPath));
-        configWatcher.onDidChange((uri : vscode.Uri) => this.reloadConfig(uri.fsPath));
-        configWatcher.onDidDelete((uri : vscode.Uri) => this.reloadConfig(uri.fsPath));
+        this.addDisposable( configWatcher.onDidCreate((uri : vscode.Uri) => this.reloadConfig(uri.fsPath)) );
+        this.addDisposable( configWatcher.onDidChange((uri : vscode.Uri) => this.reloadConfig(uri.fsPath)) );
+        this.addDisposable( configWatcher.onDidDelete((uri : vscode.Uri) => this.reloadConfig(uri.fsPath)) );
+
+        this.addDisposable( this.statusBar );
+        this.addDisposable( this.diag );
+        this.addDisposable( this.buildOutputChannel );
+        this.addDisposable( this.runOutputChannel );
     }
 
     private validateConfig : ajv.ValidateFunction;
@@ -491,7 +502,6 @@ class Extension
         if( choice )
         {
             this.buildConfig = choice;
-            this.updateStatus();
         }
     }
 
