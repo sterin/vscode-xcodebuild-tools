@@ -355,6 +355,8 @@ class Extension
 
     private async wrapBuild<T>( f: () => T ) : Promise<T|null>
     {
+        vscode.workspace.saveAll();
+
         if( this.buildState !== BuildState.IDLE )
         {
             return null;
