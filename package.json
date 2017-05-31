@@ -2,7 +2,7 @@
   "name": "xcodebuild-tools",
   "displayName": "Xcodebuild Tools",
   "description": "Work with Xcode projects from inside Visual Studio Code",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "sterin",
   "homepage": "https://github.com/sterin/vscode-xcodebuild-tools/blob/master/README.md",
   "repository": {
@@ -114,11 +114,11 @@
     "test": "node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^6.0.73",
+    "mocha": "^2.3.3",
     "typescript": "^2.3.3",
     "vscode": "^1.0.0"
-    "mocha": "^2.3.3",
-    "@types/node": "^6.0.73",
-    "@types/mocha": "^2.2.41",
   },
   "extensionDependencies": [
     "ms-vscode.cpptools"
