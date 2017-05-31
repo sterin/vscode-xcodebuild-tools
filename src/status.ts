@@ -10,6 +10,9 @@ export class StatusBar
         vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 5.03);
 
     private debugStatusItem =
+        vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 5.021);
+
+    private runStatusItem =
         vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 5.02);
 
     private debugConfigStatusItem =
@@ -31,6 +34,10 @@ export class StatusBar
         this.debugStatusItem.tooltip = "Click to launch the debugger for the selected debug configuration";
         this.debugStatusItem.text = "$(bug)";
 
+        this.runStatusItem.command = "xcodebuild-tools.run";
+        this.runStatusItem.tooltip = "Click to run (without debugging) the selected debug configuration";
+        this.runStatusItem.text = "$(triangle-right)";
+
         this.debugConfigStatusItem.command = "xcodebuild-tools.selectDebugConfiguration";
         this.debugConfigStatusItem.tooltip = "Click to select the debug configuration";
 
@@ -44,6 +51,7 @@ export class StatusBar
         f(this.buildStatusItem);
         f(this.buildConfigStatusItem);
         f(this.debugStatusItem);
+        f(this.runStatusItem);
         f(this.debugConfigStatusItem);
         f(this.killStatusItem);
     }
