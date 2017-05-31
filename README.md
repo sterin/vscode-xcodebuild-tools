@@ -2,6 +2,8 @@
 
 Work with Xcode projects from inside Visual Studio Code.
 
+Feedback is highy appreciated! Let me know if this works for you.
+
 ## Caveats
 
 * First release, my first non-trivial TypeScript/JavaScript program - expect bugs, problems, and non-idiomatic code.
