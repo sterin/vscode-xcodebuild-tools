@@ -32,7 +32,7 @@ const DefaultConfiguration : Configuration =
 {
     workspace: null,
     scheme: null,
-    variables: null,
+    variables: new Map<string, string>(),
     postBuildTasks: [],
     debugConfigurations: []
 };
@@ -166,7 +166,12 @@ class Extension
         try
         {
             let config = await util.readJSON(fileName, this.validateConfig);
+
+            if( config.variables )
+            {
             config.variables = new Map<string, string>(util.entries(config.variables));
+            }
+
             this.config = util.merge(DefaultConfiguration, config);
         }
         catch(e)
