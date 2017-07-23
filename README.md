@@ -59,9 +59,43 @@ In a new directory:
 }
 ```
 
-5. Use xcodebuild-tools command to build, debug, run, clean, switch build configuration, and switch debug configurations.
+5. Use `xcodebuild-tools` command to build, debug, run, clean, switch build configuration, and switch debug configurations.
 
 6. Use the status bar to build, debug, switch configurations or kill the build.
+
+## iOS Example
+
+1. Create an iOS example similar to above, but for iOS.
+
+2. Install `ios-sim` using `npm`:
+
+```shell
+    npm install --global ios-sim
+```
+
+3. Use a configuration file similar to the following one:
+
+```json
+{
+    "sdk": "iphonesimulator10.3",
+    "workspace": "${workspaceRoot}/test.xcodeproj/project.xcworkspace",
+    "scheme": "test",
+    "debugConfigurations": [
+        {
+            "name": "Simulator",
+            "cwd": "${buildPath}",
+            "program": "ios-sim",
+            "args": [
+                "launch", "test.app/",
+                "--devicetypeid",  "com.apple.CoreSimulator.SimDeviceType.iPhone-7, 10.3"
+            ]
+        }        
+    ]
+}
+```
+
+4. Use `xcodebuild-tools` commands to build and run the project in the simulator.
+
 
 ## Credits
 

@@ -38,6 +38,10 @@
 
     "type": "object",
     "properties": {
+        "sdk": {
+            "type": "string",
+            "description": "name or path of the base SDK"
+        },
         "workspace": {
             "type": "string",
             "description": "path to Xcode workspace"

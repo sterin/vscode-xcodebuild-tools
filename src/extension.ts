@@ -21,6 +21,7 @@ interface TaskConfiguration
 
 interface Configuration
 {
+    sdk: string;
     workspace: string;
     scheme: string;
     variables: Map<string,string>;
@@ -30,6 +31,7 @@ interface Configuration
 
 const DefaultConfiguration : Configuration = 
 {
+    sdk: null,
     workspace: null,
     scheme: null,
     variables: new Map<string, string>(),
@@ -169,7 +171,7 @@ class Extension
 
             if( config.variables )
             {
-            config.variables = new Map<string, string>(util.entries(config.variables));
+                config.variables = new Map<string, string>(util.entries(config.variables));
             }
 
             this.config = util.merge(DefaultConfiguration, config);
@@ -327,20 +329,28 @@ class Extension
 
     private async asyncSpawnXcodebuild(e:expander.Expander, extraArgs:string[]) : Promise<child_process.ChildProcess>
     {
-        let args: SpawnOptions= {
+        let args = [
+            "-workspace", this.config.workspace, 
+            "-scheme", this.config.scheme, 
+            "-configuration", this.buildConfig,
+        ];
+
+        if( this.config.sdk )
+        {
+            args.push("-sdk", this.config.sdk);
+        }
+
+        args.push("CONFIGURATION_BUILD_DIR=${buildPath}");
+
+        let opts: SpawnOptions= {
             program: "xcodebuild",
-            args: [
-                "-workspace", this.config.workspace, 
-                "-scheme", this.config.scheme, 
-                "-configuration", this.buildConfig,
-                "CONFIGURATION_BUILD_DIR=${buildPath}"
-            ].concat(extraArgs),
+            args: args.concat(extraArgs),
             channel: this.buildOutputChannel,
             initChannel: true,
             parseOutput: true
         };
 
-        return await this.asyncSpawn(expand(e, args));
+        return await this.asyncSpawn(expand(e, opts));
     }
 
     private async asyncSpawnTask(e:expander.Expander, task: TaskConfiguration) : Promise<child_process.ChildProcess>
