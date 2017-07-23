@@ -32,7 +32,7 @@ export function parseOutput(diags:vscode.DiagnosticCollection, s:stream.Readable
             let d = new vscode.Diagnostic(
                 new vscode.Range(line, col, line, 1000),
                 message,
-                Severity[severity]
+                severity
             );
 
             if( ! messages.has(file) )
