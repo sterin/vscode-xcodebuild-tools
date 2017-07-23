@@ -3,6 +3,11 @@ All notable changes to the "vscode-xcodebuild-tools" extension will be documente
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.0.4
+- Add the ability to specify the SDK in xcodebuild-tools.json
+- Fix severity of messages in Problem View. Previously, all messages were displayed as errors.
+- Updated README.md with an iOS example.
+
 ## 0.0.3
 - Save all before building.
 - Add a new status icon for running (without a debugger) the selected debug configuration.

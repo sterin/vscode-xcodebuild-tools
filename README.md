@@ -2,7 +2,7 @@
 
 Work with Xcode projects from inside Visual Studio Code.
 
-Feedback is highy appreciated! Let me know if this works for you.
+Feedback is highy appreciated! Let me know if this works for you? Are there any showstopping bugs? Any features missing?
 
 ## Caveats
 
