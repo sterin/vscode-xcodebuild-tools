@@ -115,15 +115,15 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
-    "@types/node": "^6.0.73",
-    "mocha": "^2.3.3",
-    "typescript": "^2.3.3",
-    "vscode": "^1.0.0"
+    "@types/node": "^8.0.15",
+    "mocha": "^3.4.2",
+    "typescript": "^2.4.2",
+    "vscode": "^1.1.4"
   },
   "extensionDependencies": [
     "ms-vscode.cpptools"
   ],
   "dependencies": {
-    "ajv": "^4.11.8"
+    "ajv": "^5.2.2"
   }
 }
