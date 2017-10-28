@@ -25,6 +25,7 @@ interface Configuration
     workspace: string;
     scheme: string;
     variables: Map<string,string>;
+    preBuildTasks: TaskConfiguration[];
     postBuildTasks: TaskConfiguration[];
     debugConfigurations: TaskConfiguration[];
 }
@@ -35,6 +36,7 @@ const DefaultConfiguration : Configuration =
     workspace: null,
     scheme: null,
     variables: new Map<string, string>(),
+    preBuildTasks: [],
     postBuildTasks: [],
     debugConfigurations: []
 };
@@ -346,7 +348,7 @@ class Extension
             program: "xcodebuild",
             args: args.concat(extraArgs),
             channel: this.buildOutputChannel,
-            initChannel: true,
+            initChannel: false,
             parseOutput: true
         };
 
@@ -394,6 +396,14 @@ class Extension
 
     private async asyncBuild(e:expander.Expander)
     {
+        this.buildOutputChannel.clear();
+        this.buildOutputChannel.show();
+
+        for( let task of this.config.preBuildTasks )
+        {
+            await this.asyncSpawnTask(e, task);
+        }
+        
         await this.asyncSpawnXcodebuild(e, []);
 
         for( let task of this.config.postBuildTasks )

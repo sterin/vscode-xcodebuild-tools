@@ -50,6 +50,9 @@
             "type": "string",
             "description": "name of Xcode scheme"
         },
+        "preBuildTasks": { 
+            "$ref": "#/definitions/tasks" 
+        },        
         "postBuildTasks": { 
             "$ref": "#/definitions/tasks" 
         },
