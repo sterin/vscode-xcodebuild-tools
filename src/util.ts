@@ -134,13 +134,25 @@ export function displayOutput(c: vscode.OutputChannel, s:stream.Readable): void
     });
 }
 
-export function spawn(program:string, args:string[], cwd:string) : child_process.ChildProcess
+export function spawn(program:string, args:string[], cwd:string, env?:Map<string, string>) : child_process.ChildProcess
 {
     let options = {};
 
     if( cwd )
     {
         options['cwd'] = cwd;
+    }
+
+    if( env )
+    {
+        let e = {...process.env};
+
+        for( let [v, val] of env )
+        {
+            e[v] = val;
+        }
+
+        options["env"] = e;
     }
 
     let proc = child_process.spawn(program, args, options);
@@ -173,4 +185,16 @@ export function *entries(o: object) : IterableIterator<[string, string]>
     {
         yield [k, <string>o[k]];
     }
+}
+
+export function to_object(M: Map<string, string>)
+{
+    const o = new Object();
+
+    for( let [k, v] of M )
+    {
+        o[k] = v;
+    }
+
+    return o;
 }

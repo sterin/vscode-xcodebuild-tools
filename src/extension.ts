@@ -25,6 +25,7 @@ interface Configuration
     workspace: string;
     scheme: string;
     variables: Map<string,string>;
+    env: Map<string,string>;
     preBuildTasks: TaskConfiguration[];
     postBuildTasks: TaskConfiguration[];
     debugConfigurations: TaskConfiguration[];
@@ -36,6 +37,7 @@ const DefaultConfiguration : Configuration =
     workspace: null,
     scheme: null,
     variables: new Map<string, string>(),
+    env: new Map<string, string>(),
     preBuildTasks: [],
     postBuildTasks: [],
     debugConfigurations: []
@@ -59,6 +61,7 @@ interface SpawnOptions
     program: string;
     args: string[];
     cwd?: string;
+    env?: Map<string, string>;
 
     channel: vscode.OutputChannel;
     initChannel?: boolean;
@@ -73,6 +76,7 @@ function expand(e:expander.Expander, opts: SpawnOptions) : SpawnOptions
         program: e.expand(opts.program),
         args: e.expand(opts.args),
         cwd: e.expand(opts.cwd),
+        env: e.expand(opts.env),
 
         channel: opts.channel,
         initChannel: opts.initChannel,
@@ -176,6 +180,11 @@ class Extension
                 config.variables = new Map<string, string>(util.entries(config.variables));
             }
 
+            if( config.env )
+            {
+                config.env = new Map<string, string>(util.entries(config.env));
+            }
+
             this.config = util.merge(DefaultConfiguration, config);
         }
         catch(e)
@@ -273,7 +282,7 @@ class Extension
 
     private spawn(args:SpawnOptions) : child_process.ChildProcess
     {
-        let proc = util.spawn(args.program, args.args, args.cwd);
+        let proc = util.spawn(args.program, args.args, args.cwd, args.env);
         this.buildProcess = proc;
 
         util.redirectToChannel(proc, args.channel, args.initChannel);
@@ -347,6 +356,7 @@ class Extension
         let opts: SpawnOptions= {
             program: "xcodebuild",
             args: args.concat(extraArgs),
+            env: this.config.env,
             channel: this.buildOutputChannel,
             initChannel: false,
             parseOutput: true
@@ -362,6 +372,7 @@ class Extension
             program: task.program,
             args: task.args,
             cwd: task.cwd,
+            env: this.config.env,            
             channel: this.buildOutputChannel,
             initChannel: false,
             message: `Runnning Task: ${task.name}`

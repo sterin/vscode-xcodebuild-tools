@@ -28,6 +28,15 @@
                 "cwd"
             ]
         },
+        "variables": {
+            "type": "object",
+            "patternProperties": {
+                "^[A-Za-z0-9_]+$" : {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
         "tasks": {
             "type": "array",
             "items": { 
@@ -60,13 +69,10 @@
             "$ref": "#/definitions/tasks" 
         },
         "variables": {
-            "type": "object",
-            "patternProperties": {
-                "^[A-Za-z_]+$" : {
-                    "type": "string"
-                }
-            },
-            "additionalProperties": false
+            "$ref": "#/definitions/variables"
+        },
+        "env": {
+            "$ref": "#/definitions/variables"
         }
     },
     "required": [

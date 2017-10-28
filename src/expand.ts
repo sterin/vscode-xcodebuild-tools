@@ -83,10 +83,23 @@ export class Expander
         return a.map( s => this.expandString(s) );
     }
 
+    private expandMap(a: Map<string, string>) : Map<string, string>
+    {
+        let M = new Map<string, string>();
+
+        for( let [v, val] of a )
+        {
+            M.set(v, this.expandString(val));
+        }
+        
+        return M;
+    }
+
     public expand(s: string) : string;
     public expand(a: string[]) : string[];
     public expand(n: null) : null;
     public expand(u: undefined) : undefined;
+    public expand(x: Map<string,string>)
     public expand(x: any)
     {
         if( x === null )
@@ -101,9 +114,13 @@ export class Expander
         {
             return this.expandString(x);
         }
-        else
+        else if( x instanceof Array )
         {
             return this.expandArray(x);
+        }
+        else
+        {
+            return this.expandMap(x);
         }
     }
 }
