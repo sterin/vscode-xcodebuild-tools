@@ -1,0 +1,35 @@
+{
+    "workspace": "${workspaceRoot}/helloworld.xcworkspace",
+    "scheme": "build",
+    "variables": {
+        "ARG1": "argument 1",
+        "ARG2": "argument 2"
+    },
+    "preBuildTasks": [
+        {
+            "name": "Sleep for a second",
+            "program": "sleep",
+            "args": [ "1" ],
+            "cwd": "${workspaceRoot}"
+        }
+    ],
+    "postBuildTasks": [
+        {
+            "name": "Sleep for a second",
+            "program": "sleep",
+            "args": [ "1" ],
+            "cwd": "${workspaceRoot}"
+        }
+    ],
+    "debugConfigurations": [
+        {
+            "name": "test",
+            "cwd": "${workspaceRoot}",
+            "program": "${buildPath}/helloworld",
+            "args": [
+                "${ARG1}",
+                "${ARG2}"
+            ]
+        }
+    ] 
+}

@@ -6,125 +6,124 @@
 	"publisher": "sterin",
 	"homepage": "https://github.com/sterin/vscode-xcodebuild-tools/blob/master/README.md",
 	"repository": {
-	  "type": "git",
-	  "url": "https://github.com/sterin/vscode-xcodebuild-tools.git"
+		"type": "git",
+		"url": "https://github.com/sterin/vscode-xcodebuild-tools.git"
 	},
 	"bugs": {
-	  "url": "https://github.com/sterin/vscode-xcodebuild-tools/issues"
+		"url": "https://github.com/sterin/vscode-xcodebuild-tools/issues"
 	},
 	"engines": {
-		  "vscode": "^1.19.0"
+		"vscode": "^1.19.0"
 	},
 	"license": "SEE LICENSE IN LICENSE.md",
 	"categories": [
-	  "Other"
+		"Other"
 	],
 	"keywords": [
-	  "Xcode",
-	  "Xcodebuild",
-	  "osx",
-	  "macOS"
+		"Xcode",
+		"Xcodebuild",
+		"osx",
+		"macOS"
 	],
 	"activationEvents": [
-	  "onCommand:xcodebuild-tools.build",
-	  "onCommand:xcodebuild-tools.clean",
-	  "onCommand:xcodebuild-tools.debug",
-	  "onCommand:xcodebuild-tools.profile",
-	  "onCommand:xcodebuild-tools.run",
-	  "onCommand:xcodebuild-tools.kill",
-	  "onCommand:xcodebuild-tools.selectBuildConfiguration",
-	  "onCommand:xcodebuild-tools.selectDebugConfiguration",
-	  "onCommand:xcodebuild-tools.openXcode",
-	  "workspaceContains:.vscode/xcodebuild-tools.json"
+		"onCommand:xcodebuild-tools.build",
+		"onCommand:xcodebuild-tools.clean",
+		"onCommand:xcodebuild-tools.debug",
+		"onCommand:xcodebuild-tools.profile",
+		"onCommand:xcodebuild-tools.run",
+		"onCommand:xcodebuild-tools.kill",
+		"onCommand:xcodebuild-tools.selectBuildConfiguration",
+		"onCommand:xcodebuild-tools.selectDebugConfiguration",
+		"onCommand:xcodebuild-tools.openXcode",
+		"workspaceContains:.vscode/xcodebuild-tools.json"
 	],
 	"main": "./out/src/extension",
 	"contributes": {
-	  "commands": [
-		{
-		  "command": "xcodebuild-tools.build",
-		  "title": "Build",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.clean",
-		  "title": "Clean",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.debug",
-		  "title": "Launch Debug Session",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.profile",
-		  "title": "Profile Program",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.run",
-		  "title": "Run without Debugging",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.kill",
-		  "title": "Kill Build",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.selectBuildConfiguration",
-		  "title": "Select Build Configuration",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.selectDebugConfiguration",
-		  "title": "Select Debug Configuration",
-		  "category": "Xcodebuild-tools"
-		},
-		{
-		  "command": "xcodebuild-tools.openXcode",
-		  "title": "Open Xcode",
-		  "category": "Xcodebuild-tools"
-		}
-	  ],
-	  "keybindings": [
-		{
-		  "key": "f7",
-		  "command": "xcodebuild-tools.build"
-		},
-		{
-		  "key": "ctrl+f5",
-		  "command": "xcodebuild-tools.debug"
-		},
-		{
-		  "key": "alt+shift+f5",
-		  "command": "xcodebuild-tools.run"
-		}
-	  ],
-	  "jsonValidation": [
-		{
-		  "fileMatch": ".vscode/xcodebuild-tools.json",
-		  "url": "./schemas/xcodebuild-tools-schema.json"
-		}
-	  ]
+		"commands": [
+			{
+				"command": "xcodebuild-tools.build",
+				"title": "Build",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.clean",
+				"title": "Clean",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.debug",
+				"title": "Launch Debug Session",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.profile",
+				"title": "Profile Program",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.run",
+				"title": "Run without Debugging",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.kill",
+				"title": "Kill Build",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.selectBuildConfiguration",
+				"title": "Select Build Configuration",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.selectDebugConfiguration",
+				"title": "Select Debug Configuration",
+				"category": "Xcodebuild-tools"
+			},
+			{
+				"command": "xcodebuild-tools.openXcode",
+				"title": "Open Xcode",
+				"category": "Xcodebuild-tools"
+			}
+		],
+		"keybindings": [
+			{
+				"key": "f7",
+				"command": "xcodebuild-tools.build"
+			},
+			{
+				"key": "ctrl+f5",
+				"command": "xcodebuild-tools.debug"
+			},
+			{
+				"key": "alt+shift+f5",
+				"command": "xcodebuild-tools.run"
+			}
+		],
+		"jsonValidation": [
+			{
+				"fileMatch": ".vscode/xcodebuild-tools.json",
+				"url": "./schemas/xcodebuild-tools-schema.json"
+			}
+		]
 	},
 	"scripts": {
-	  "vscode:prepublish": "tsc -p ./",
-	  "compile": "tsc -watch -p ./",
-	  "postinstall": "node ./node_modules/vscode/bin/install",
-	  "test": "node ./node_modules/vscode/bin/test"
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-	  "@types/mocha": "^2.2.41",
-	  "@types/node": "^8.0.15",
-	  "mocha": "^3.4.2",
-	  "typescript": "^2.4.2",
-		  "vscode": "^1.1.10"
+		"@types/mocha": "^2.2.41",
+		"@types/node": "^8.0.15",
+		"mocha": "^3.4.2",
+		"typescript": "^2.4.2",
+		"vscode": "^1.1.10"
 	},
 	"extensionDependencies": [
-	  "ms-vscode.cpptools"
+		"ms-vscode.cpptools"
 	],
 	"dependencies": {
-	  "ajv": "^5.2.2"
+		"ajv": "^5.2.2"
 	}
-  }
-  
+}

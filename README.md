@@ -19,11 +19,13 @@ Feedback is highy appreciated! Let me know if this works for you? Are there any 
 
 ## Example
 
-In a new directory:
+The subdirectory `example/helloworld` contains a working example. Open VScode there.
+
+Alternatively, in a new directory:
 
 1. Create a new Xcode command line project, with the original name `project`.
 
-2. Create a new Xcode workspace named `workspace` in the same directory.
+2. Create a new Xcode workspace named `workspace` in the same directory. Add the project to the workspace.
 
 3. Create a new scheme named `build` inside the workspace and add `project` to the scheme.
 
