@@ -3,6 +3,9 @@ All notable changes to the "vscode-xcodebuild-tools" extension will be documente
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.0.6
+- Fix debugging (switch to new `vscode.debug.startDebugging()`).
+
 ## 0.0.5
 - Support environment variables in configuration file.
 - Add preBuildTasks section to configuration file for task running before building.
