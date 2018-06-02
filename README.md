@@ -17,9 +17,9 @@ Feedback is highy appreciated! Let me know if this works for you? Are there any 
 * Debug directly from vscode - easily define debug configuration.
 * Status bar items that make it easy to build, debug, switch build and debug configurations.
 
-## Example
+## macOS Example
 
-The subdirectory `example/helloworld` contains a working example. Open VScode there.
+The subdirectory `examples/helloworld` contains a working example. Open VScode there.
 
 Alternatively, in a new directory:
 
@@ -67,6 +67,10 @@ Alternatively, in a new directory:
 
 ## iOS Example
 
+The subdirectory `examples/helloworld-ios` contains a working example. Open VScode there.
+
+Alternatively, in a new directory:
+
 1. Create an iOS example similar to above, but for iOS.
 
 2. Install `ios-sim` using `npm`:
@@ -79,17 +83,20 @@ Alternatively, in a new directory:
 
 ```json
 {
-    "sdk": "iphonesimulator10.3",
-    "workspace": "${workspaceRoot}/test.xcodeproj/project.xcworkspace",
-    "scheme": "test",
+    "variables": {
+        "SDK_VERSION": "11.4"
+    },
+    "sdk": "iphonesimulator${SDK_VERSION}",
+    "workspace": "${workspaceRoot}/helloworld-ios.xcworkspace",
+    "scheme": "build",
     "debugConfigurations": [
         {
             "name": "Simulator",
             "cwd": "${buildPath}",
             "program": "ios-sim",
             "args": [
-                "launch", "test.app/",
-                "--devicetypeid",  "com.apple.CoreSimulator.SimDeviceType.iPhone-7, 10.3"
+                "launch", "project.app/",
+                "--devicetypeid",  "com.apple.CoreSimulator.SimDeviceType.iPhone-7, ${SDK_VERSION}"
             ]
         }        
     ]
