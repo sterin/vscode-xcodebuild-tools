@@ -25,6 +25,7 @@ interface Configuration
     workspace: string;
     scheme: string;
     variables: Map<string,string>;
+    args: string[];
     env: Map<string,string>;
     preBuildTasks: TaskConfiguration[];
     postBuildTasks: TaskConfiguration[];
@@ -37,6 +38,7 @@ const DefaultConfiguration : Configuration =
     workspace: null,
     scheme: null,
     variables: new Map<string, string>(),
+    args: [],
     env: new Map<string, string>(),
     preBuildTasks: [],
     postBuildTasks: [],
@@ -344,6 +346,7 @@ class Extension
             "-workspace", this.config.workspace, 
             "-scheme", this.config.scheme, 
             "-configuration", this.buildConfig,
+            ...this.config.args
         ];
 
         if( this.config.sdk )
