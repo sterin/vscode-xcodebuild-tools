@@ -37,6 +37,13 @@
             },
             "additionalProperties": false
         },
+        "args": {
+            "description": "List of additional arguments for xcodebuild",
+            "type": "array",
+            "items": {
+                "type":"string"
+            }
+        },
         "tasks": {
             "type": "array",
             "items": { 
@@ -73,6 +80,9 @@
         },
         "env": {
             "$ref": "#/definitions/variables"
+        },
+        "args": {
+            "$ref": "#/definitions/args"
         }
     },
     "required": [
