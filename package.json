@@ -2,7 +2,7 @@
 	"name": "xcodebuild-tools",
 	"displayName": "Xcodebuild Tools",
 	"description": "Work with Xcode projects from inside Visual Studio Code",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"publisher": "sterin",
 	"homepage": "https://github.com/sterin/vscode-xcodebuild-tools/blob/master/README.md",
 	"repository": {
