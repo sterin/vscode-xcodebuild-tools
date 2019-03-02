@@ -1,0 +1,29 @@
+jobs:
+
+  - job: macOS
+
+    pool:
+      vmImage: 'macOS-10.13'
+
+    steps:
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install -g yarn vsce
+      displayName: Install vsce and yarn
+
+    - script: |
+        yarn
+      displayName: Install node dependencies
+
+    - script: |
+        vsce package
+      displayNAme: Package extension
+
+    - script: |
+        vsce publish -p ${ACCESS_TOKEN}
+      displayNAme: Publish extension
