@@ -22,8 +22,8 @@ jobs:
 
     - script: |
         vsce package
-      displayNAme: Package extension
+      displayName: Package extension
 
     - script: |
         vsce publish -p ${ACCESS_TOKEN}
-      displayNAme: Publish extension
+      displayName: Publish extension
