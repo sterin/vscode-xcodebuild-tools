@@ -25,5 +25,11 @@ jobs:
       displayName: Package extension
 
     - script: |
-        vsce publish -p ${ACCESS_TOKEN}
-      displayName: Publish extension
+        cp *.vsix ${BUILD_ARTIFACTSTAGINGDIRECTORY}
+      displayName: Stage pacakged extension
+
+    - task: PublishPipelineArtifact@0
+      inputs:
+        artifactName: 'drop'
+        targetPath: $(Build.ArtifactStagingDirectory)
+      displayName: Publish artifacts
