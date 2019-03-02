@@ -1,2 +1,7 @@
 out
 node_modules
+
+py/build
+py/dist
+py/*.egg-info
+
