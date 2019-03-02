@@ -1,3 +1,6 @@
+trigger:
+  - release
+
 jobs:
 
   - job: macOS
@@ -33,3 +36,7 @@ jobs:
         artifactName: 'drop'
         targetPath: $(Build.ArtifactStagingDirectory)
       displayName: Publish artifacts
+
+    - script: |
+        vsce publish -p ${PERSONAL_ACCESS_TOKEN}
+      displayName: Package extension
