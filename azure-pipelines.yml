@@ -38,5 +38,5 @@ jobs:
       displayName: Publish artifacts
 
     - script: |
-        vsce publish -p ${PERSONAL_ACCESS_TOKEN}
+        vsce publish -p $(PERSONAL_ACCESS_TOKEN)
       displayName: Package extension
