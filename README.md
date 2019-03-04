@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/baruchs/vscode-xcodebuild-tools/_apis/build/status/sterin.vscode-xcodebuild-tools?branchName=master)](https://dev.azure.com/baruchs/vscode-xcodebuild-tools/_build/latest?definitionId=5&branchName=master)
+
 # Xcodebuild-tools
 
 Work with Xcode projects from inside Visual Studio Code.
