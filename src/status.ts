@@ -46,7 +46,7 @@ export class StatusBar
         this.killStatusItem.text = "$(x)";
     }
 
-    public forallItems(f: (item:vscode.StatusBarItem)=>void)
+    public forAllItems(f: (item:vscode.StatusBarItem)=>void)
     {
         f(this.buildStatusItem);
         f(this.buildConfigStatusItem);
@@ -58,17 +58,12 @@ export class StatusBar
 
     public dispose()
     {
-        this.forallItems(i => i.dispose());
-    }
-
-    public show()
-    {
-        this.forallItems(i => i.show());
+        this.forAllItems(i => i.dispose());
     }
 
     public hide()
     {
-        this.forallItems(i => i.hide());
+        this.forAllItems(i => i.hide());
     }
 
     public update(buildConfig: string, debugConfig:string)
@@ -76,6 +71,16 @@ export class StatusBar
         this.buildConfigStatusItem.text = buildConfig;
         this.debugConfigStatusItem.text = debugConfig;
 
-        this.show();
+        this.forAllItems( (i) => 
+        {
+            if( debugConfig === null && ( i===this.debugStatusItem || i===this.runStatusItem || i===this.debugConfigStatusItem ) )
+            {
+                i.hide();
+            }
+            else
+            {
+                i.show();
+            }
+        });
     }
 }

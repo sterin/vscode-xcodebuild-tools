@@ -50,11 +50,14 @@ export class Expander
 
             const val = this.definitions.get(s);
 
-            for( let k of this.definitions.keys() )
+            if( val !== null )
             {
-                if( val.indexOf(k) !== -1 )
+                for( let k of this.definitions.keys() )
                 {
-                    visit(k);
+                    if( val.indexOf(k) !== -1 )
+                    {
+                        visit(k);
+                    }
                 }
             }
 

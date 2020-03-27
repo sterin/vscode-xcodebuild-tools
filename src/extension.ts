@@ -201,11 +201,17 @@ class Extension
     private getState<T>(
         key: string, 
         legal:(val:T)=>boolean, 
-        otherwise:(key:string)=>T)
+        otherwise:(key:string)=>T,
+        valid:()=>boolean=()=>true)
     {
+        if( !valid() )
+        {
+            return null;
+        }
+
         let val = this.context.workspaceState.get<T>(key);
 
-        if( ! val || !legal(val) )
+        if( !val || !legal(val) )
         {
             val = otherwise(key);
             this.context.workspaceState.update(key, val);
@@ -233,9 +239,11 @@ class Extension
     {
         return this.getState<string>(
             "debugConfig", 
-            (val:string) => true, 
-            (key:string) => this.config.debugConfigurations.length > 0 ? this.config.debugConfigurations[0].name : null
+            (val:string) => this.config.debugConfigurations.some( (t) => t.name==val ), 
+            (key:string) => this.config.debugConfigurations[0].name,
+            () => this.config.debugConfigurations.length > 0
         );
+        
     }
 
     set debugConfigName(config: string)
