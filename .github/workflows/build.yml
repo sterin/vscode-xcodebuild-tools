@@ -1,0 +1,43 @@
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+
+    - name: npm install
+      run: |
+        npm install
+    
+    - name: Build
+      run: |
+        npm build
+
+    - name: Install vsce
+      run: |
+        npm install -g vsce
+
+    - name: Build pacakge
+      run: |
+        vsce package
+        mkdir out-package
+        cp *.vsix out-package/
+
+    - name: Upload pacakge artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: Package
+        path: out-package/
+
+    - name: Publish package
+      if: startsWith(github.event.ref, 'refs/tags')
+      run: |
+        vsce publish --pat ${{ secrets.PERSONAL_ACCESS_TOKEN }}

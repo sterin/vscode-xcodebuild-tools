@@ -3,6 +3,9 @@ All notable changes to the "vscode-xcodebuild-tools" extension will be documente
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.0.8
+- Added Github Actions CI/CD.
+
 ## 0.0.7
 - Add a way of supplying additional arguments to `xcodebuild`. Thanks to @amatosov-rbx.
 
